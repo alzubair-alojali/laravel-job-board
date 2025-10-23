@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('post', function (Blueprint $table) {
-            $table->string('author');
-        });
+        Schema::dropIfExists('comment');
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('post', function (Blueprint $table) {
-            $table->dropColumn('author');
-        });
+        //
     }
 };

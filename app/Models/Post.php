@@ -10,4 +10,8 @@ class Post extends Model
     protected $table ='post';
     protected $fillable = ['title','body','author','published'];//filed that can be updated
     protected $guarded = ['id']; //cannot be updades/assigned (read only)
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }
