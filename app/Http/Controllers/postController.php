@@ -17,9 +17,9 @@ class postController extends Controller
     function create()
     {
         Post::create([
-            'title' => 'mu first post',
-            'body' => 'this is my content',
-            'author' => 'alzubair',
+            'title' => 'test post for testing',
+            'body' => 'this is my hooool content',
+            'author' => 'yahya',
             'published' => true
         ]);
         return redirect('/blog');
@@ -34,5 +34,9 @@ class postController extends Controller
     {
         post::destroy(1);
         return redirect('/blog');
+    }
+    function testmanytomany()
+    {
+
     }
 }

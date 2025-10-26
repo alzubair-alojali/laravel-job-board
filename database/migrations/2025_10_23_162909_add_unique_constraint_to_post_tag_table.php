@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tag', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->timestamps();
+        Schema::table('post_tag', function (Blueprint $table) {
+            $table->unique(['post_id','tag_id']);
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tag');
+        Schema::table('post_tag', function (Blueprint $table) {
+            $table->dropUnique(['post_id','tag_id']);
+        });
     }
 };

@@ -16,9 +16,9 @@ class commentController extends Controller
     }
     function create(){
         comment::create([
-            'author'=>'mohamed',
-            'content'=> 'this is a secound test comment',
-            'post_id'=>1
+            'author'=>'ali',
+            'content'=> 'this is a first test comment',
+            'post_id'=>2
         ]);
         return redirect('/comments');
     }
