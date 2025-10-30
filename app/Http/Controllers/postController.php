@@ -7,36 +7,64 @@ use Illuminate\Http\Request;
 
 class postController extends Controller
 {
-    function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        //Eloquent ORM -> Get all data
-        $data = Post::all();
+        //display 5 data for each page
+        $data = Post::cursorPaginate(5);
         //pass the data to the view
         return view("post/index", ['posts' => $data, 'pageTitle' => 'blog']);
     }
-    function create()
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        Post::create([
-            'title' => 'test post for testing',
-            'body' => 'this is my hooool content',
-            'author' => 'yahya',
-            'published' => true
-        ]);
-        return redirect('/blog');
+        return view('post/create', ['pageTitle' => 'create post']);
     }
-    function show($id)
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // TODO this will be completed in form section
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
         //findorfail mean if there are no data you will return to 404 page
         $post = Post::findOrFail($id);
         return view('post/show', ['post' => $post, 'pageTitle' => $post->title]);
     }
-    function delete()
-    {
-        post::destroy(1);
-        return redirect('/blog');
-    }
-    function testmanytomany()
-    {
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        return view('post/edit', ['pageTitle' => 'edit post']);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
