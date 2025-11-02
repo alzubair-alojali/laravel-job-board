@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\aboutController;
+use App\Http\Controllers\authController;
 use App\Http\Controllers\commentController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\indexController;
@@ -16,4 +17,7 @@ Route::get('/job',[jobController::class,'index'] );
 
 Route::resource('blog', postController::class);
 Route::resource('tag', tagController::class);
-Route::resource('comments', commentController::class);
+Route::resource('comment', commentController::class);
+
+Route::get('/login', [authController::class,'showLoginForm'] );
+Route::get('/signup', [authController::class,'showSignupForm'] );

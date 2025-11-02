@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="h-full bg-gray-900 text-white" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
     <title>laravel - {{ $title }}</title>
 
 </head>
@@ -33,7 +34,8 @@
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <x-nav-link href="/" :active="request()->is('/')">home</x-nav-link>
                                 <x-nav-link href="/about" :active="request()->is('about')"> about</x-nav-link>
-                                <x-nav-link href="/contact" :active="request()->is('contact')">contact </x-nav-link>
+                                <x-nav-link href="/contact" :active="request()->is('contact')">contact</x-nav-link>
+                                <x-nav-link href="/blog" :active="request()->is('blog')">blog</x-nav-link>
                             </div>
                         </div>
                     </div>
@@ -58,8 +60,7 @@
                                     <span class="absolute -inset-1.5"></span>
                                     <span class="sr-only">Open user menu</span>
                                     <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                        alt=""
-                                        class="size-8 rounded-full outline -outline-offset-1 outline-white/10" />
+                                        alt="" class="size-8 rounded-full outline -outline-offset-1 outline-white/10" />
                                 </button>
 
                                 <el-menu anchor="bottom end" popover
@@ -114,8 +115,7 @@
                     <div class="flex items-center px-5">
                         <div class="shrink-0">
                             <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                alt=""
-                                class="size-10 rounded-full outline -outline-offset-1 outline-white/10" />
+                                alt="" class="size-10 rounded-full outline -outline-offset-1 outline-white/10" />
                         </div>
                         <div class="ml-3">
                             <div class="text-base/5 font-medium text-white">Tom Cook</div>
@@ -156,10 +156,11 @@
         <main>
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                 <!-- Your content -->
+                {{ $slot }}
             </div>
         </main>
     </div>
-    {{ $slot }}
+
 </body>
 
 </html>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\commentRequest;
 use App\Models\comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class commentController extends Controller
@@ -12,10 +14,7 @@ class commentController extends Controller
      */
     public function index()
     {
-        //Eloquent ORM -> Get all data
-        $data=comment::paginate(10);
-        //pass the data to the view
-        return view("comment/index",['comments'=>$data,'pageTitle'=>'blog']);
+        return redirect('/blog');
     }
 
     /**
@@ -23,15 +22,21 @@ class commentController extends Controller
      */
     public function create()
     {
-        return view('comment/create', ['pageTitle' => 'create comment']);
+        return redirect('/blog');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(commentRequest $request)
     {
-        // TODO this will be completed in form section
+        $post= Post::findOrFail($request->post_id);
+        $comment = new comment();
+        $comment->post_id=$request->input('post_id');
+        $comment->content= $request->input('content');
+        $comment->author=$request->input('author');
+        $comment->save();
+        return redirect("/blog/{$post->id}")->with('success','comment created successfully');
     }
 
     /**
@@ -39,9 +44,7 @@ class commentController extends Controller
      */
     public function show(string $id)
     {
-        //findorfail mean if there are no data you will return to 404 page
-        $comment = comment::findOrFail($id);
-        return view('comment/show', ['comment' => $comment, 'pageTitle' => 'edit comment']);
+        return redirect('/blog');
     }
 
     /**
@@ -58,7 +61,11 @@ class commentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // TODO this will be completed in form section
+        $comment = comment::findOrFail($id);
+        $comment->content=$request->input('content');
+        $comment->author=$request->input('author');
+        $comment->save();
+        return redirect("/blog/{$comment->post_id}")->with('success','comment updated successfully');
     }
 
     /**
@@ -66,6 +73,9 @@ class commentController extends Controller
      */
     public function destroy(string $id)
     {
-        // TODO this will be completed in form section
+        $comment = comment::findOrFail($id);
+        $postid = $comment->post_id;
+        $comment->delete();
+        return redirect("/blog/{$postid}")->with('success','comment deleted successfully');
     }
 }
