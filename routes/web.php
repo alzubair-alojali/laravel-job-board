@@ -19,8 +19,7 @@ Route::get('/job', [jobController::class, 'index']);
 
 Route::get('/login', [authController::class, 'showLoginForm']);
 Route::get('/signup', [authController::class, 'showSignupForm']);
-
-Route::post('/login', [authController::class, 'login'])->name('login');
+Route::post('/login', [authController::class, 'login'])->name(name: 'login');
 Route::post('/signup', [authController::class, 'signup'])->name('signup');
 Route::post('/logout', [authController::class, 'logout'])->name('logout');
 

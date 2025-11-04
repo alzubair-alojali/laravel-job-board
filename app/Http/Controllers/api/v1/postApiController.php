@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -13,8 +13,8 @@ class postApiController extends Controller
      */
     public function index()
     {
-        $data=Post::paginate(5);
-        return response($data,200);
+        $data = Post::paginate(5);
+        return response($data, 200);
     }
 
     /**
@@ -22,8 +22,8 @@ class postApiController extends Controller
      */
     public function store(Request $request)
     {
-        $data=Post::create($request->all());
-        return response($data,201);
+        $data = Post::create($request->all());
+        return response($data, 201);
     }
 
     /**
@@ -31,11 +31,11 @@ class postApiController extends Controller
      */
     public function show(string $id)
     {
-        $data=Post::find($id);
-        if(!$data){
-            return response(['message'=>'Post not found'],404);
+        $data = Post::find($id);
+        if (!$data) {
+            return response(['message' => 'Post not found'], 404);
         }
-        return response($data,200);
+        return response($data, 200);
     }
 
     /**
@@ -43,12 +43,12 @@ class postApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data=Post::find($id);
-        if(!$data){
-            return response(['message'=>'Post not found'],404);
+        $data = Post::find($id);
+        if (!$data) {
+            return response(['message' => 'Post not found'], 404);
         }
         $data->update($request->all());
-        return response($data,200);
+        return response($data, 200);
     }
 
     /**
@@ -56,11 +56,11 @@ class postApiController extends Controller
      */
     public function destroy(string $id)
     {
-        $data=Post::find($id);
-        if(!$data){
-            return response(['message'=>'Post not found'],404);
+        $data = Post::find($id);
+        if (!$data) {
+            return response(['message' => 'Post not found'], 404);
         }
         $data->delete();
-        return response(null,204);
+        return response(null, 204);
     }
 }

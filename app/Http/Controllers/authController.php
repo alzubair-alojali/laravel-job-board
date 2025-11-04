@@ -32,7 +32,7 @@ class authController extends Controller
     public function login(loginRequest $request)
     {
         $credentials = $request->only('email', 'password');
-        if (auth()->attempt($credentials)) {
+        if (auth('web')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect('/');
         }
